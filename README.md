@@ -89,4 +89,4 @@
 ![API설계.png](API설계.png)
 
 ## DB 설계
-[DB.png](DB설계.png)
+![DB.png](DB설계.png)
