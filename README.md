@@ -86,7 +86,7 @@
       → 나쁜 예 (❌): "다른 기능이 더 있어야 하지 않을까?"
 
 ## API 설계
-![img.png](img.png)
+![API설계.png](API설계.png)
 
 ## DB 설계
-![](../../Downloads/Spring Skillful Assignment.drawio.png)
+[DB.png](DB설계.png)
