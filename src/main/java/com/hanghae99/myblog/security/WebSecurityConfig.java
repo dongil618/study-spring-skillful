@@ -20,10 +20,10 @@ import static org.springframework.security.config.Customizer.withDefaults;
 @ConditionalOnWebApplication(type = ConditionalOnWebApplication.Type.SERVLET)
 public class WebSecurityConfig {
 
-//    @Bean
-//    public BCryptPasswordEncoder passwordEncoder() {
-//        return new BCryptPasswordEncoder();
-//    }
+    @Bean
+    public BCryptPasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 
 //    @Bean
 //    public void configure(WebSecurity web) {
@@ -34,6 +34,9 @@ public class WebSecurityConfig {
     @Bean
     @Order(SecurityProperties.BASIC_AUTH_ORDER)
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http.csrf()
+                        .ignoringAntMatchers("/**");
+
         http
                 .csrf().disable()
                 .headers().frameOptions().disable()
