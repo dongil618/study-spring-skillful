@@ -7,12 +7,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-
-import static org.springframework.security.config.Customizer.withDefaults;
 
 @Configuration
 @EnableWebSecurity
@@ -41,17 +38,21 @@ public class WebSecurityConfig {
                 .csrf().disable()
                 .headers().frameOptions().disable()
                 .and()
-                .authorizeRequests()
-                .antMatchers("/", "/signin","/signup","/css/**", "/images/**",
-                        "/js/**", "/h2-console/**").permitAll()
-                .anyRequest().authenticated()
+                    .authorizeRequests()
+                    .antMatchers("/", "/signin","/signup","/css/**", "/images/**",
+                            "/js/**", "/h2-console/**").permitAll()
+                    .anyRequest().authenticated()
                 .and()
                     .formLogin()
                     .loginPage("/signin")
+                    .usernameParameter("nickname")
+                    .loginProcessingUrl("/signin")
                     .defaultSuccessUrl("/")
+                    .failureUrl("/signin?error")
                     .permitAll()
                 .and()
                     .logout()
+                    .logoutUrl("/logout")
                     .logoutSuccessUrl("/");
         return http.build();
     }
