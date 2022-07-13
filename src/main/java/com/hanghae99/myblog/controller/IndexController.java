@@ -1,5 +1,6 @@
 package com.hanghae99.myblog.controller;
 
+import com.hanghae99.myblog.dto.SigninRequestDto;
 import com.hanghae99.myblog.dto.SignupRequestDto;
 import com.hanghae99.myblog.repository.UserRepository;
 import com.hanghae99.myblog.service.UserService;
@@ -8,6 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+
+import javax.validation.Valid;
 
 
 @Controller
@@ -27,8 +30,8 @@ public class IndexController {
     }
 
     @PostMapping("/signin")
-    public String postSignin(){
-        System.out.println("signin post");
+    public String postSignin(SigninRequestDto requestDto){
+        System.out.println(requestDto.getNickname() + requestDto.getPassword());
         return "redirect:/signin";
     }
 
@@ -38,7 +41,7 @@ public class IndexController {
     }
 
     @PostMapping("/signup")
-    public String createUser(SignupRequestDto requestDto){
+    public String createUser(@Valid SignupRequestDto requestDto){
         userService.registerUser(requestDto);
         System.out.println(requestDto.toString());
         //User user = new User(requestDto);
