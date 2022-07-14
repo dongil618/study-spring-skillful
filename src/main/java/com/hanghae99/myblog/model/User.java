@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @ToString
 @Getter
@@ -17,6 +19,14 @@ public class User extends Timestamped {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "USER_ID")
     private  Long id;
+
+//    @OneToMany
+//    @Column(name="USER_ID")
+//    private List<Post> posts = new ArrayList<>();
+//
+//    @OneToMany
+//    @Column(name="USER_ID")
+//    private List<Comment> comments = new ArrayList<>();
 
 
     @Column(nullable = false, unique = true)
@@ -30,9 +40,5 @@ public class User extends Timestamped {
         this.password = password;
     }
 
-    public User(SignupRequestDto requestDto){
-        this.nickname = requestDto.getNickname();
-        this.password = requestDto.getPassword();
-    }
 
 }
