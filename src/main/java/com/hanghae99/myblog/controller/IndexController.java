@@ -2,7 +2,6 @@ package com.hanghae99.myblog.controller;
 
 import com.hanghae99.myblog.dto.SigninRequestDto;
 import com.hanghae99.myblog.dto.SignupRequestDto;
-import com.hanghae99.myblog.repository.UserRepository;
 import com.hanghae99.myblog.security.UserDetailsImpl;
 import com.hanghae99.myblog.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -11,7 +10,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.validation.Valid;
 
@@ -38,14 +36,6 @@ public class IndexController {
         return "signin";
     }
 
-    @PostMapping("/signin")
-    public String postSignin(SigninRequestDto requestDto){
-        System.out.println(requestDto.getNickname() + requestDto.getPassword());
-        return "redirect:/";
-    }
-
-//    @GetMapping("/logout")
-//    public String
 
     @GetMapping("/signup")
     public String signup(){
