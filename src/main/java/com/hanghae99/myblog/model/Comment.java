@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.Optional;
 
 @ToString
 @Getter
@@ -30,12 +31,14 @@ public class Comment extends Timestamped{
     @Column(nullable = false)
     private String comment;
 
-    public Comment(String comment){
-        this.comment = comment;
+    public Comment(CommentRequestDto requestDto, User user, Post post){
+        this.comment = requestDto.getComment();
+        this.user = user;
+        this.post = post;
     }
 
-    public Comment(CommentRequestDto requestDto){
+    // 댓글 수정
+    public void update(CommentRequestDto requestDto) {
         this.comment = requestDto.getComment();
     }
-
 }
