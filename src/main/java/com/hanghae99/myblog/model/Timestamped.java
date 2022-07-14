@@ -1,5 +1,6 @@
 package com.hanghae99.myblog.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -9,15 +10,15 @@ import javax.persistence.EntityListeners;
 import javax.persistence.MappedSuperclass;
 import java.time.LocalDateTime;
 
-@MappedSuperclass // 상속했을 때, 컬럼으로 인식하게 합니다.
-@EntityListeners(AuditingEntityListener.class) // 생성/수정 시간을 자동으로 반영하도록 설정
-@Getter // Getter가 없으면 작동이 안됨.
-public abstract class Timestamped {             // abstract는 상속이 되어야지만 사용할 수 있는 클래스라는 것을 의미
+@Getter // get 함수를 자동 생성합니다.
+@MappedSuperclass // 멤버 변수가 컬럼이 되도록 합니다.
+@EntityListeners(AuditingEntityListener.class) // 변경되었을 때 자동으로 기록합니다.
+public abstract class Timestamped {
+    @CreatedDate // 최초 생성 시점
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime createdAt;
 
-    @CreatedDate // 생성일자임을 나타냅니다.
-    private LocalDateTime createdAt;        // LocalDateTime은 시간을 나타내는 자료형
-
-    @LastModifiedDate // 마지막 수정일자임을 나타냅니다.
+    @LastModifiedDate // 마지막 변경 시점
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime modifiedAt;
 }
-
