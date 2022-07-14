@@ -22,17 +22,14 @@ public class WebSecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
-//    @Bean
-//    public void configure(WebSecurity web) {
-//        // h2-console 사용에 대한 허용 (CSRF, FrameOptions 무시)
-//        web.ignoring().antMatchers("/h2-console/**");
-//    }
-
     @Bean
     @Order(SecurityProperties.BASIC_AUTH_ORDER)
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf()
-                        .ignoringAntMatchers("/**");
+                .ignoringAntMatchers("/")
+                .ignoringAntMatchers("/signin")
+                .ignoringAntMatchers("/signup")
+                .ignoringAntMatchers("/posts/**");
 
         http
                 .csrf().disable()
